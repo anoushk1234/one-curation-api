@@ -2,7 +2,7 @@ FROM python:3.9-alpine
 
 ENV PYTHONUNBUFFERED 1
 
-COPY ./requirements.txt /requirements.txt
+COPY Pipfile* ./
 
 # Install postgres client
 RUN apk add --update --no-cache postgresql-client
@@ -11,7 +11,9 @@ RUN apk add --update --no-cache postgresql-client
 # so that we could avoid installing extra packages to the container
 RUN apk add --update --no-cache --virtual .tmp-build-deps \
     gcc libc-dev linux-headers postgresql-dev
-RUN pip install -r /requirements.txt
+RUN pip install pipenv
+RUN pipenv install --deploy --system
+
 
 # Remove dependencies
 RUN apk del .tmp-build-deps
