@@ -10,6 +10,10 @@ djangorestframework = "3.13.1"
 psycopg2-binary = "*"
 
 [dev-packages]
+black = "*"
 
 [requires]
 python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
